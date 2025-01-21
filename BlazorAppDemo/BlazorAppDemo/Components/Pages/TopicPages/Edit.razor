@@ -1,0 +1,109 @@
+﻿@page "/topics/edit"
+@using Microsoft.EntityFrameworkCore
+@using BlazorAppDemo.Models
+@inject IDbContextFactory<BlazorAppDemo.Data.BlazorAppDemoContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Topic</h2>
+<hr />
+@if (Topic is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Topic" OnValidSubmit="UpdateTopic" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <input type="hidden" name="Topic.TopicID" value="@Topic.TopicID" />
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title:</label>
+                    <InputText id="title" @bind-Value="Topic.Title" class="form-control" />
+                    <ValidationMessage For="() => Topic.Title" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <InputText id="description" @bind-Value="Topic.Description" class="form-control" />
+                    <ValidationMessage For="() => Topic.Description" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="author" class="form-label">Author:</label>
+                    <InputText id="author" @bind-Value="Topic.Author" class="form-control" />
+                    <ValidationMessage For="() => Topic.Author" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="publishdate" class="form-label">PublishDate:</label>
+                    <InputDate id="publishdate" @bind-Value="Topic.PublishDate" class="form-control" />
+                    <ValidationMessage For="() => Topic.PublishDate" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="link" class="form-label">Link:</label>
+                    <InputText id="link" @bind-Value="Topic.Link" class="form-control" />
+                    <ValidationMessage For="() => Topic.Link" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/topics">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int TopicID { get; set; }
+
+    [SupplyParameterFromForm]
+    private Topic? Topic { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Topic ??= await context.Topic.FirstOrDefaultAsync(m => m.TopicID == TopicID);
+
+        if (Topic is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateTopic()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Topic!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!TopicExists(Topic!.TopicID))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/topics");
+    }
+
+    private bool TopicExists(int topicid)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Topic.Any(e => e.TopicID == topicid);
+    }
+}

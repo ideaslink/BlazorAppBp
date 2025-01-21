@@ -1,0 +1,40 @@
+﻿@page "/topics"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using BlazorAppDemo.Models
+@using BlazorAppDemo.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<BlazorAppDemo.Data.BlazorAppDemoContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="topics/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.Topic">
+    <PropertyColumn Property="topic => topic.Title" />
+    <PropertyColumn Property="topic => topic.Description" />
+    <PropertyColumn Property="topic => topic.Author" />
+    <PropertyColumn Property="topic => topic.PublishDate" />
+    <PropertyColumn Property="topic => topic.Link" />
+
+    <TemplateColumn Context="topic">
+        <a href="@($"topics/edit?topicid={topic.TopicID}")">Edit</a> |
+        <a href="@($"topics/details?topicid={topic.TopicID}")">Details</a> |
+        <a href="@($"topics/delete?topicid={topic.TopicID}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private BlazorAppDemoContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

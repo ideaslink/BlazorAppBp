@@ -1,0 +1,13 @@
+﻿@page "/privacy"
+@* @rendermode InteractiveAuto *@
+
+<h3>Privacy</h3>
+<p>Running on: @(IsServer ? "Server" : "WebAsswmbly") </p>
+<p>render mode:  </p>
+
+<p>@DateTime.Now</p>
+<Counter Step="5" />
+
+@code {
+    private bool IsServer => !OperatingSystem.IsBrowser();
+}
