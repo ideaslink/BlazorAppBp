@@ -1,10 +1,12 @@
-﻿using BlazorAppDemo.Client.Pages;
+using BlazorAppDemo.Client.Pages;
 using BlazorAppDemo.Components;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using BlazorAppDemo.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
 builder.Services.AddDbContextFactory<BlazorAppDemoContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BlazorAppDemoContext") ?? throw new InvalidOperationException("Connection string 'BlazorAppDemoContext' not found.")));
 
@@ -18,6 +20,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BlazorAppDemo.ServiceDefaults\BlazorAppDemo.ServiceDefaults.csproj" />
     <ProjectReference Include="..\BlazorAppDemo.Client\BlazorAppDemo.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.5" />

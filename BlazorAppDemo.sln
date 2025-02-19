@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAppDemo", "BlazorAppD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAppDemo.Client", "BlazorAppDemo\BlazorAppDemo.Client\BlazorAppDemo.Client.csproj", "{01228C48-AA10-4717-8430-F5C1AFDFC594}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorAppDemo.AppHost", "BlazorAppDemo.AppHost\BlazorAppDemo.AppHost.csproj", "{D0202780-F650-4BE1-89BE-49BD73448E08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorAppDemo.ServiceDefaults", "BlazorAppDemo.ServiceDefaults\BlazorAppDemo.ServiceDefaults.csproj", "{B3843C1E-1BDB-4878-B4DA-BF21AADF7712}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{01228C48-AA10-4717-8430-F5C1AFDFC594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01228C48-AA10-4717-8430-F5C1AFDFC594}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01228C48-AA10-4717-8430-F5C1AFDFC594}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0202780-F650-4BE1-89BE-49BD73448E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0202780-F650-4BE1-89BE-49BD73448E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0202780-F650-4BE1-89BE-49BD73448E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0202780-F650-4BE1-89BE-49BD73448E08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3843C1E-1BDB-4878-B4DA-BF21AADF7712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3843C1E-1BDB-4878-B4DA-BF21AADF7712}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3843C1E-1BDB-4878-B4DA-BF21AADF7712}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3843C1E-1BDB-4878-B4DA-BF21AADF7712}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
